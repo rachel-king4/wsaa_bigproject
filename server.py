@@ -47,19 +47,19 @@ def create():
 # update
 # curl -X PUT -d "{\"name\":\"Roy Keane\", \"age\":25, \"nationality\":\"Irish\"}" http://XXX.X.X.X:XXXX/players/1
 
-@app.route('/books/<int:id>', methods=['PUT'])
+@app.route('/players/<int:id>', methods=['PUT'])
 def update(id):
         jsonstring = request.json
-        book = {}
+        player = {}
 
-        if "title" in jsonstring:
-                book["title"] = jsonstring["title"]
-        if "author" in jsonstring:
-                book["author"] = jsonstring["author"]
-        if "price" in jsonstring:
-                book["price"] = jsonstring["price"]
+        if "name" in jsonstring:
+                player["name"] = jsonstring["name"]
+        if "age" in jsonstring:
+                player["age"] = jsonstring["age"]
+        if "nationality" in jsonstring:
+                player["nationality"] = jsonstring["nationality"]
         
-        return jsonify(bookDAO.update(id, book))
+        return jsonify(playerDAO.update(id, player))
 
 # Delete
 # curl -X DELETE  http://XXX.X.X.X:XXXX/players/1
