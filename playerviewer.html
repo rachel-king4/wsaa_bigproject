@@ -153,8 +153,8 @@
         var player = {}
         player.id = form.querySelector('input[name="id"]').value
         player.name = form.querySelector('input[name="name"]').value
-        player.age = form.querySelector('input[name="age"]').value
-        player.nationality = parseInt(form.querySelector('input[name="nationality"]').value,10)
+        player.age = parseInt(form.querySelector('input[name="age"]').value,10)
+        player.nationality = form.querySelector('input[name="nationality"]').value
         console.log(JSON.stringify(player))
         return player
     }
