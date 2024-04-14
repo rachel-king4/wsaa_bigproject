@@ -12,7 +12,7 @@ mydb = mysql.connector.connect(
 )
 
 
-mycursor = mydb.connection.cursor()
+mycursor = mydb.connect.cursor()
 sql="CREATE TABLE player (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), age INT, nationality VARCHAR(255))"
 
 mycursor.execute(sql)

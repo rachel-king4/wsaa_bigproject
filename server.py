@@ -4,7 +4,7 @@
 from flask import Flask, request, jsonify, abort
 from playerDAO import playerDAO
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='.')
 
 @app.route('/')
 def index():
@@ -28,19 +28,15 @@ def findbyid(id):
 #curl -X POST -d "{\"name\":\"Roy Keane\", \"age\":25, \"nationality\":\"Irish\"}" http://XXX.X.X.X:XXXX/players
 @app.route('/players', methods=['POST'])
 def create():
-        # read json from the body
-        jsonstring = request.json
-        player = {}
-
-        if "name" not in jsonstring:
-                abort(403)
-        player["name"] = jsonstring["name"]
-        if "age" not in jsonstring:
-                abort(403)
-        player["age"] = jsonstring["age"]
-        if "nationality" not in jsonstring:
-                abort(403)
-        player["nationality"] = jsonstring["nationality"]
+        if not request.json:
+                abort(400)
+        
+        # other checking 
+        player = {
+                "name": request.json['name'],
+                "age": request.json['age'],
+                "nationality": request.json['nationality'],
+        }
         
         return jsonify(playerDAO.create(player))
 
