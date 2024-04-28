@@ -8,6 +8,7 @@
     <body>
         <h1>Players</h1>
         <div> <button id="showCreateButton" onclick="showCreate()">Create</button></div>
+        <div> <button id="showFindbyClubButton" onclick="showFindAllbyClub()">Search by Club</button></div>
         <div>
             <table class="table" id="playerTable">
                 <tr>
@@ -17,11 +18,13 @@
                             Age
                         </th>
                         <th>Nationality</th>
+                        <th>Club</th>
                         <th>Update</th>
                         <th>Delete</th>
                 </tr>
                 
             </table>
+
         </div>
         <div id='createUpdateForm' style="display: none">
                 <h2><span id="createLabel">Create a</span> <span id="updateLabel">update</span> Player</h2>
@@ -29,6 +32,7 @@
                 Name <input type="text" name="name" /><br/>
                 Age <input type="number" name="age"/> <br/>
                 Nationality <input type="text" name="nationality"/> <br/>
+                Club <input type="text" name="club"/> <br/>
                 <span><button id="doCreateButton" onclick="doCreate()">Create</button></span>
                 <span><button id="doUpdateButton" onclick="doUpdate()">Update</button></span>
         </div>
@@ -68,7 +72,7 @@
         
         var player = getPlayerFromRow(rowElement)
         populateFormWithPlayer(player)
-    }
+    } 
     function doCreate(){
         var form = document.getElementById('createUpdateForm')
 
@@ -77,11 +81,12 @@
         player.name = form.querySelector('input[name="name"]').value
         player.age = form.querySelector('input[name="age"]').value
         player.nationality = form.querySelector('input[name="nationality"]').value
+        player.club = form.querySelector('input[name="club"]').value
         console.log(JSON.stringify(player))
         createPlayerAjax(player)
-        
-        
+    
     }
+
     function doUpdate(){
         var player = getPlayerFromForm();
         var rowElement = document.getElementById(player.id);
@@ -111,11 +116,14 @@
         var cell4 = rowElement.insertCell(3);
         cell4.innerHTML = player.nationality
         var cell5 = rowElement.insertCell(4);
-        cell5.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+        cell5.innerHTML = player.club
         var cell6 = rowElement.insertCell(5);
-        cell6.innerHTML = '<button onclick=doDelete(this)>delete</button>'
+        cell6.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+        var cell7 = rowElement.insertCell(6);
+        cell7.innerHTML = '<button onclick=doDelete(this)>Delete</button>'
 
     }
+
 
     function clearForm(){
         var form = document.getElementById('createUpdateForm')
@@ -123,6 +131,7 @@
         form.querySelector('input[name="name"]').value=''
         form.querySelector('input[name="age"]').value=''
         form.querySelector('input[name="nationality"]').value=''
+        form.querySelector('input[name="club"]').value=''
     }
     function getPlayerFromRow(rowElement){
         var car ={}
@@ -130,6 +139,7 @@
         player.name = rowElement.cells[1].firstChild.textContent
         player.age = parseInt(rowElement.cells[2].firstChild.textContent, 10)
         player.nationality = rowElement.cells[3].firstChild.textContent,10
+        player.club = rowElement.cells[4].firstChild.textContent
         return player
     }
     function setPlayerInRow(rowElement, player){
@@ -137,6 +147,7 @@
         rowElement.cells[1].firstChild.textContent= player.name 
         rowElement.cells[2].firstChild.textContent= player.age
         rowElement.cells[3].firstChild.textContent= player.nationality
+        rowElement.cells[4].firstChild.textContent= player.club
     }
     function populateFormWithPlayer(player){
         var form = document.getElementById('createUpdateForm')
@@ -146,6 +157,7 @@
         form.querySelector('input[name="name"]').value= player.name
         form.querySelector('input[name="age"]').value= player.age
         form.querySelector('input[name="nationality"]').value= player.nationality
+        form.querySelector('input[name="club"]').value= player.club
         return player
     }
     function getPlayerFromForm(){
@@ -155,6 +167,7 @@
         player.name = form.querySelector('input[name="name"]').value
         player.age = parseInt(form.querySelector('input[name="age"]').value,10)
         player.nationality = form.querySelector('input[name="nationality"]').value
+        player.club = form.querySelector('input[name="club"]').value
         console.log(JSON.stringify(player))
         return player
     }
@@ -177,8 +190,10 @@
         });
 
     }
+
+
     function createPlayerAjax(player){
-        //var player = {"name":"rachel", "age":1123,"nationality":"irish"}
+        //var player = {"name":"rachel", "age":1123,"nationality":"irish", "club": "liverpool"}
         console.log(JSON.stringify(player));
         $.ajax({
             "url": "/players",
@@ -199,7 +214,7 @@
         });
     }
     function updatePlayerAjax(player){
-        //var player = {"name":"rachel", "age":1123,"nationality":"irish"}
+        //var player = {"name":"rachel", "age":1123,"nationality":"irish", "club": "liverpool"}
         console.log(JSON.stringify(player));
         $.ajax({
             "url": "/players/"+encodeURI(player.id),

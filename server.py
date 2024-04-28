@@ -36,6 +36,7 @@ def create():
                 "name": request.json['name'],
                 "age": request.json['age'],
                 "nationality": request.json['nationality'],
+                "club": request.json['club'],
         }
         
         return jsonify(playerDAO.create(player))
@@ -54,6 +55,8 @@ def update(id):
                 player["age"] = jsonstring["age"]
         if "nationality" in jsonstring:
                 player["nationality"] = jsonstring["nationality"]
+        if "club" in jsonstring:
+                player["club"] = jsonstring["club"]
         
         return jsonify(playerDAO.update(id, player))
 

@@ -13,7 +13,7 @@ mydb = mysql.connector.connect(
 
 
 mycursor = mydb.connect.cursor()
-sql="CREATE TABLE player (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), age INT, nationality VARCHAR(255))"
+sql="CREATE TABLE player (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), age INT, nationality VARCHAR(255), club VARCHAR(255))"
 
 mycursor.execute(sql)
 
