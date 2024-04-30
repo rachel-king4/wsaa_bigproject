@@ -1,0 +1,283 @@
+<html>
+    <head>
+        <style> h1 {text-align: center;
+                 font-family: "Impact"; }
+                table, th, td {
+                table-layout: fixed;
+                border-collapse: collapse;
+                border: 3px solid rgb(12, 82, 21);
+                margin: 8px 0;
+                text-align: center;}
+                th {
+                font-family: "helvetica neue", helvetica, arial, sans-serif;
+                font-family: "Rock Salt", cursive;
+                letter-spacing: 2px;
+                background: url(football.jpg); }
+                td { letter-spacing: 1px; }
+                th, td {
+                padding: 20px;
+                color: white;
+                text-shadow: 1px 1px 1px black;}          
+                tr:nth-child(odd) { background-color: #1b5c36; }
+                tr:nth-child(even) { background-color: #85b890; }
+                div {font-family: "Rock Salt", cursive;}
+                table caption {
+                font-family: "Copperplate Gothic", cursive;
+                padding: 20px;
+                font-style: italic;
+                font-size: 30px;
+                font-weight: bold;
+                caption-side: bottom;
+                color: rgb(231, 228, 228);
+                text-align: right;
+                letter-spacing: 1px;
+                }
+                #button {
+                width: 12em;
+                border: 2px solid green;
+                background: #ffe;
+                border-radius: 5px;
+                }
+                a {
+                display: block;
+                width: 100%;
+                line-height: 2em;
+                text-align: center;
+                text-decoration: none;
+                border-radius: 5px;
+                }
+                a:hover {
+                color: red;
+                background: #eff;
+                }
+                </style>
+        <title> view Clubs</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+       
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" type="text/css">
+    </head>
+    <body style="background-image: radial-gradient(circle, #051d10 0%, #45a355 100%); color:whitesmoke">
+        <h1>Football Clubs</h1>
+        <div> <button id="showCreateButton" onclick="showCreate()">Add Club</button></div>
+        <div> <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a name"></div>
+        <div id="button"><a href="playerviewer.html">View Player Table</a></div>
+        <div>
+            <table class="table" id="clubTable">
+                <caption>
+                    A list of professional football clubs
+                </caption>
+                <tr>
+                        <th><u>id</u></th>
+                        <th><u>Name</u></th>
+                        <th><u>No. of Trophies Won</u></th>
+                        <th><u>Country</u></th>
+                        <th><u>Delete</u></th>
+                </tr>
+                
+            </table>
+
+        </div>
+        <div id='createForm' style="display: none">
+                <h2><span id="createLabel">Create a</span> Club</h2>
+                <input type="hidden" name="id"/>
+                Name <input type="text" name="name" /><br/>
+                No. of Trophies Won <input type="number" name="number_of_trophies_won"/> <br/>
+                Country <input type="text" name="country"/> <br/>
+                <span><button id="doCreateButton" onclick="doCreate()">Create</button></span>
+
+        </div>
+    </body>
+    <script>
+    function showCreate(){
+        document.getElementById('showCreateButton').style.display="none"
+        document.getElementById('clubTable').style.display="none"
+        document.getElementById('createForm').style.display="block"
+
+        document.getElementById('createLabel').style.display="inline"
+
+        document.getElementById('doCreateButton').style.display="block"
+
+    }
+    function showViewAll(){
+        document.getElementById('showCreateButton').style.display="block"
+        document.getElementById('myInput').style.display="block"
+        document.getElementById('button').style.display="block"
+        document.getElementById('clubTable').style.display="block"
+        document.getElementById('createForm').style.display="none"
+    }
+
+    function doCreate(){
+        var form = document.getElementById('createForm')
+
+        var club = {}
+       
+        club.name = form.querySelector('input[name="name"]').value
+        club.number_of_trophies_won = form.querySelector('input[name="number_of_trophies_won"]').value
+        club.country = form.querySelector('input[name="country"]').value
+        console.log(JSON.stringify(club))
+        createClubAjax(club)
+    
+    }
+
+    function doDelete(r){
+        var tableElement = document.getElementById('clubTable');
+        var rowElement = r.parentNode.parentNode;
+        var index = rowElement.rowIndex;
+        deleteClubAjax(rowElement.getAttribute("id"));
+        tableElement.deleteRow(index);
+    }
+    function addClubToTable(club){
+        var tableElement = document.getElementById('clubTable')
+        var rowElement = tableElement.insertRow(-1)
+        rowElement.setAttribute('id',club.id)
+        var cell1 = rowElement.insertCell(0);
+        cell1.innerHTML = club.id
+        var cell2 = rowElement.insertCell(1);
+        cell2.innerHTML = club.name
+        var cell3 = rowElement.insertCell(2);
+        cell3.innerHTML = club.number_of_trophies_won
+        var cell4 = rowElement.insertCell(3);
+        cell4.innerHTML = club.country
+        var cell5 = rowElement.insertCell(4);
+        cell5.innerHTML = '<button onclick=doDelete(this)>Delete</button>'
+
+    }
+
+
+    function clearForm(){
+        var form = document.getElementById('createForm')
+
+        form.querySelector('input[name="name"]').value=''
+        form.querySelector('input[name="number_of_trophies_won"]').value=''
+        form.querySelector('input[name="country"]').value=''
+    }
+    function getClubFromRow(rowElement){
+        var car ={}
+        club.id  = rowElement.getAttribute('id')
+        club.name = rowElement.cells[1].firstChild.textContent
+        club.number_of_trophies_won = parseInt(rowElement.cells[2].firstChild.textContent, 10)
+        club.country = rowElement.cells[3].firstChild.textContent
+        return club
+    }
+    function setClubInRow(rowElement, club){
+        rowElement.cells[0].firstChild.textContent= club.id  
+        rowElement.cells[1].firstChild.textContent= club.name 
+        rowElement.cells[2].firstChild.textContent= club.number_of_trophies_won
+        rowElement.cells[3].firstChild.textContent= club.country
+    }
+    function populateFormWithClub(club){
+        var form = document.getElementById('createForm')
+        form.querySelector('input[name="id"]').disabled = true
+
+        form.querySelector('input[name="id"]').value  = club.id
+        form.querySelector('input[name="name"]').value= club.name
+        form.querySelector('input[name="number_of_trophies_won"]').value= club.number_of_trophies_won
+        form.querySelector('input[name="country"]').value= club.country
+        return club
+    }
+    function getClubFromForm(){
+        var form = document.getElementById('createForm')
+        var club = {}
+        club.id = form.querySelector('input[name="id"]').value
+        club.name = form.querySelector('input[name="name"]').value
+        club.number_of_trophies_won = parseInt(form.querySelector('input[name="number_of_trophies_won"]').value,10)
+        club.country = form.querySelector('input[name="country"]').value
+        console.log(JSON.stringify(club))
+        return club
+    }
+    function getAllClubsAjax(){
+        $.ajax({
+            "url": "/clubs",
+            "method":"GET",
+            "data":"",
+            "dataType": "JSON",
+            "success":function(result){
+                //console.log(result);
+                for (club of result){
+                    addClubToTable(club);
+                }
+                
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
+
+    }
+
+
+    function createClubAjax(club){
+        //var player = {"name":"rachel", "age":1123,"nationality":"irish", "club": "liverpool"}
+        console.log(JSON.stringify(club));
+        $.ajax({
+            "url": "/clubs",
+            "method":"POST",
+            "data":JSON.stringify(club),
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success":function(result){
+                //console.log(result);
+                club.id = result.id
+                addClubToTable(club)
+                clearForm()
+                showViewAll()
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
+    }
+
+    function deleteClubAjax(id){
+        
+        //console.log(JSON.stringify('deleting '+id));
+        $.ajax({
+            "url": "/clubs/"+encodeURI(id),
+            "method":"DELETE",
+            "data":"",
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success":function(result){
+                //console.log(result);
+                  
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
+    }
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("clubTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            // td = tr[i].getElementsByTagName("td")[0];
+            alltags = tr[i].getElementsByTagName("td");
+            isFound = false;
+            for(j=0; j< alltags.length; j++) {
+            td = alltags[j];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    j = alltags.length;
+                    isFound = true;
+                }
+                }       
+            }
+            if(!isFound && tr[i].className !== "header") {
+                tr[i].style.display = "none";
+            }
+            }
+        }
+
+
+    getAllClubsAjax();
+  
+
+    
+    </script>
+</html>
