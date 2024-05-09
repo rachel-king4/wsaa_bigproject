@@ -19,7 +19,7 @@ The Web Services and Application module was undertaken in the third semester of 
 - References
 
 ## **Introduction**
-Web application for a database containing table of football players and football clubs, hosted online using PythonAnyhere (https://rachelking.eu.pythonanywhere.com/)
+Web application for a database containing tables of football players and football clubs, hosted online using PythonAnyhere (https://rachelking.eu.pythonanywhere.com/)
 
 ## **Project Contents**
 The repository contains a number of files required to create and host the web application. The files contained in the repository are:
@@ -50,25 +50,25 @@ The playerviewer file is a html (HyperText Markip Language) file which is the co
 Similar to the playerviewer file, the clubviewer file defines the content and basic structure of the web page for viewing football clubs in the database.
 
 
-## Online Hosting
+## **Online Hosting**
 The application is hosted online using the online web hosting service PythonAnywhere. A Github repostitory, containing all the required code, is used to deploy the application to the server.
 
 ## **Running the Program**
+The files above were deployed to PythonAnywhere using a repository on Github named "deloytogithub" (should be named deployto pythonanywhere, this was named incorrectly in error). The web appliacation was set up on PythonAnywhere by setting the source code and working directory to reference the applicable directory. This can be viewed at https://eu.pythonanywhere.com/user/rachelking/webapps/#tab_id_rachelking_eu_pythonanywhere_com.
+
+To view the player table, the following link can be pasted into a web browser:
+
+https://rachelking.eu.pythonanywhere.com/playerviewer.html
+
+Similarly, to view the player table, the following link can be pasted into a web browser:
+
+https://rachelking.eu.pythonanywhere.com/clubviewer.html
+
+The club table viewer is accessible through a button on the player viewer html page, and vice versa. The html pages contain buttons whereby players can be created, updated and deleted and clubs can be created and deleted.
+
+The list of players in the player table in json format can be accessed at https://rachelking.eu.pythonanywhere.com/players. Similarly, the list of clubs in the club table in json format can be accessed at https://rachelking.eu.pythonanywhere.com/clubs.
+
+To view a player or club by its ID, add the id number to the end of https://rachelking.eu.pythonanywhere.com/players/ or https://rachelking.eu.pythonanywhere.com/clubs/1 (e.g. https://rachelking.eu.pythonanywhere.com/players/1).
 
 
 ## **References**
-
-
-
-## Project Plan
-
-- Create a web application in Flask that has a RESTfull API
-- application link to one or more database tables
-- create web page that can consume the API (performs CRUD operations on the data)
-- host the server on a cloud hosting site (Azure, pythonanywhere)
-
-Extra marks:
-- looks nice
-- more than one database table
-- link to outside data source and analyse data in real time
-- host online 
