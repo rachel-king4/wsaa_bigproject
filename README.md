@@ -68,7 +68,7 @@ The club table viewer is accessible through a button on the player viewer html p
 
 The list of players in the player table in json format can be accessed at https://rachelking.eu.pythonanywhere.com/players. Similarly, the list of clubs in the club table in json format can be accessed at https://rachelking.eu.pythonanywhere.com/clubs.
 
-To view a player or club by its ID, add the id number to the end of https://rachelking.eu.pythonanywhere.com/players/ or https://rachelking.eu.pythonanywhere.com/clubs/ (e.g. https://rachelking.eu.pythonanywhere.com/players/1).
+To view a player or club by its ID, add the id number to the end of https://rachelking.eu.pythonanywhere.com/players/ or https://rachelking.eu.pythonanywhere.com/clubs/ (e.g. https://rachelking.eu.pythonanywhere.com/players/1). 
 
 
 ## **References**
