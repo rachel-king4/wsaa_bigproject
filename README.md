@@ -2,7 +2,7 @@
 
 This repository stores the Web Services and Application project assigned as part of the Web Services and Application module.
 
-The Web Services and Application module was undertaken in the third semester of Higher Diploma in Science in Computing in Data Analytics.
+The Web Services and Application module was undertaken in the third semester of Higher Diploma in Science in Computing in Data Analytics, January-May 2024.
 
 ## **Table of Contents**
 
@@ -19,7 +19,7 @@ The Web Services and Application module was undertaken in the third semester of 
 - References
 
 ## **Introduction**
-Web application for a database containing tables of football players and football clubs, hosted online using PythonAnyhere (https://rachelking.eu.pythonanywhere.com/)
+A web application was created for a database containing tables of football players and football clubs, hosted online using PythonAnyhere (https://rachelking.eu.pythonanywhere.com/). The application allows the user to view both tables in the database, and make changes to the tables by creating, updating or deleting data.
 
 ## **Project Contents**
 The repository contains a number of files required to create and host the web application. The files contained in the repository are:
@@ -32,10 +32,10 @@ The repository contains a number of files required to create and host the web ap
     - config file
 
 ### **playerDAO.py**
-The playerDAO.py file contains the python code for the application that acts as the link between the database and the main application. The DAO (Date Access Object) looks after adding, updating, retrieving and deleting data from the MySQL database.
+The playerDAO.py file contains the python code for the application that acts as the link between the database and the main application. The DAO (Date Access Object) looks after adding, updating, retrieving and deleting data from the MySQL database. (1)
 
 ### **server.py**
-The server.py file is a Flask application which acts as the backend server. The server sets the route the returns specific text when the root url is accessed. Flask is a Python web framework, and is used to deploy a simple web application to a local server.
+The server.py file is a Flask application which acts as the backend server. The server sets the route the returns specific text when the root url is accessed. Flask is a Python web framework, and is used to deploy a simple web application to a local server. (3)
 
 ### **create_table.py**
 This file contains code to access a database and create a table in the database. The code in this file can be adapted to create any type of table required.
@@ -44,17 +44,17 @@ This file contains code to access a database and create a table in the database.
 The config file contains the details required to access the database (host name and password), in this case the MySQL database contained in my online development environment on PythonAnywhere.
 
 ### **playerviewer.html**
-The playerviewer file is a html (HyperText Markip Language) file which is the core language of the world wide web. The html file defines the content and basic structure of the web page for viewing football players in the database.
+The playerviewer file is a html (HyperText Markip Language) file which is the core language of the world wide web. The html file defines the content and basic structure of the web page for viewing football players in the database. Styles were applied to the html page to improve the aesthetics of the page. (2)
 
 ### **clubviewer.html**
-Similar to the playerviewer file, the clubviewer file defines the content and basic structure of the web page for viewing football clubs in the database.
+Similar to the playerviewer file, the clubviewer file defines the content and basic structure of the web page for viewing football clubs in the database. Styles were applied to the html page to improve the aesthetics of the page. (2)
 
 
 ## **Online Hosting**
 The application is hosted online using the online web hosting service PythonAnywhere. A Github repostitory, containing all the required code, is used to deploy the application to the server.
 
 ## **Running the Program**
-The files above were deployed to PythonAnywhere using a repository on Github named "deloytogithub" (should be named deployto pythonanywhere, this was named incorrectly in error). The web appliacation was set up on PythonAnywhere by setting the source code and working directory to reference the applicable directory. This can be viewed at https://eu.pythonanywhere.com/user/rachelking/webapps/#tab_id_rachelking_eu_pythonanywhere_com.
+The files above were deployed to PythonAnywhere using a repository on Github named "deloytogithub" (should be named deploytopythonanywhere, this was named incorrectly in error). The web appliacation was set up on PythonAnywhere by setting the source code and working directory to reference the applicable directory. This can be viewed at https://eu.pythonanywhere.com/user/rachelking/webapps/#tab_id_rachelking_eu_pythonanywhere_com.
 
 To view the player table, the following link can be pasted into a web browser:
 
@@ -68,7 +68,17 @@ The club table viewer is accessible through a button on the player viewer html p
 
 The list of players in the player table in json format can be accessed at https://rachelking.eu.pythonanywhere.com/players. Similarly, the list of clubs in the club table in json format can be accessed at https://rachelking.eu.pythonanywhere.com/clubs.
 
-To view a player or club by its ID, add the id number to the end of https://rachelking.eu.pythonanywhere.com/players/ or https://rachelking.eu.pythonanywhere.com/clubs/1 (e.g. https://rachelking.eu.pythonanywhere.com/players/1).
+To view a player or club by its ID, add the id number to the end of https://rachelking.eu.pythonanywhere.com/players/ or https://rachelking.eu.pythonanywhere.com/clubs/ (e.g. https://rachelking.eu.pythonanywhere.com/players/1).
 
 
 ## **References**
+
+The main reference for this project was material provided through lectures and code by module lecturer Andrew Beatty (4)
+
+1. https://stackoverflow.com/questions/69677507/data-access-object-dao-in-python-flask-sqlalchemy
+
+2. https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Styling_tables
+
+3. https://www.codecademy.com/article/deploying-a-simple-python-script-with-flask
+
+4. https://github.com/andrewbeattycourseware/wsaa-course-material
