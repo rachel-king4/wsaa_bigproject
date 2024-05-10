@@ -64,7 +64,7 @@ Similarly, to view the club table, the following link can be pasted into a web b
 
 https://rachelking.eu.pythonanywhere.com/clubviewer.html
 
-The club table viewer is accessible through a button on the player viewer html page, and vice versa. The html pages contain buttons whereby players can be created, updated and deleted and clubs can be created and deleted.
+The club table viewer is accessible through a button on the player viewer html page, and vice versa. The html pages contain buttons whereby players can be created, updated and deleted and clubs can be created and deleted. 
 
 The list of players in the player table in json format can be accessed at https://rachelking.eu.pythonanywhere.com/players. Similarly, the list of clubs in the club table in json format can be accessed at https://rachelking.eu.pythonanywhere.com/clubs.
 
