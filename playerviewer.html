@@ -121,9 +121,7 @@
         document.getElementById('doCreateButton').style.display="none"
         document.getElementById('doUpdateButton').style.display="block"
 
-
         var rowElement = buttonElement.parentNode.parentNode
-        // these is a way of finding the closest <tr> which would safer, closest()
         
         var player = getPlayerFromRow(rowElement)
         populateFormWithPlayer(player)
@@ -233,7 +231,6 @@
             "data":"",
             "dataType": "JSON",
             "success":function(result){
-                //console.log(result);
                 for (player of result){
                     addPlayerToTable(player);
                 }
@@ -257,7 +254,6 @@
             "dataType": "JSON",
             contentType: "application/json; charset=utf-8",
             "success":function(result){
-                //console.log(result);
                 player.id = result.id
                 addPlayerToTable(player)
                 clearForm()
@@ -278,7 +274,6 @@
             "dataType": "JSON",
             contentType: "application/json; charset=utf-8",
             "success":function(result){
-               // console.log(result);
                   
             },
             "error":function(xhr,status,error){
@@ -311,7 +306,6 @@
         table = document.getElementById("playerTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            // td = tr[i].getElementsByTagName("td")[0];
             alltags = tr[i].getElementsByTagName("td");
             isFound = false;
             for(j=0; j< alltags.length; j++) {
@@ -331,10 +325,7 @@
             }
         }
 
-
     getAllAjax();
   
-
-    
     </script>
 </html>
